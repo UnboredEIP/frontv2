@@ -2,50 +2,68 @@ import '../Auth.css'
 import Button from '../../../components/button/Button';
 import { AuthContext } from '../../../contexts/AuthContext';
 import { useContext, useState } from 'react';
+import Input from '../../../components/input/Input';
 
-export const Login = () => {
+interface LoginProps {
+    pageType: string;
+}
+
+export const Login: React.FC<LoginProps> = ({pageType}) => {
     const { Log } = useContext(AuthContext);
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [stay, setStay] = useState<boolean>(false);
 
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
-    };
-    
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
-    };
+    const handleInput: { [key: string]: (value: string) => void } = {
+        email: setEmail,
+        password: setPassword,
+    }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        handleInput[event.target.id](event.target.value);
+    }
 
     const handleStayChange = () => {
         setStay(!stay);
     };
 
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
-
         if (email && password) {
             email.length > 0 && Log(email, password, stay);
         }
     };
 
+    const Title = {
+        text: {
+            login: "Connecte toi !",
+            loginPro: "Tu est un professionel ?"
+        },
+        desc: {
+            login: "Ou crée ton compte si tu n'en as pas encore un !",
+            loginPro: "Ou crée toi ton compte pro"
+        },
+        linkTo: {
+            login: "/register",
+            loginPro: "/pro/register"
+        }
+    }
+
     return (
         <div className='d-flex justify-content-center'>
             <div className='Card d-flex col-4 align-items-center flex-column py-auto mx-auto'>
                 <div className='CardTitle my-1'>
-                    <h1> Connecte toi ! </h1>
-                    <a href="/register"> Ou crée ton compte si tu n'en as pas encore </a>
+                    <h1> {Title.text[pageType as keyof typeof Title.text]} </h1>
+                    <a href={Title.linkTo[pageType as keyof typeof Title.linkTo]}> {Title.desc[pageType as keyof typeof Title.desc]} </a>
                 </div>
                 
                 <div className='d-flex CardContent justify-content-start w-100 px-1 flex-column text-start'>
-                    <p className='my-0'>Email</p>
-                    <input id="email" className='CardInput mb-2' type="email" placeholder='Email' onChange={handleEmailChange} value={email}></input>
+                    <Input id="email" title="Email" type="email" placeholder='Email' onChange={handleChange} value={email}></Input>
                 </div>
 
                 <div className='d-flex CardContent justify-content-start w-100 px-1 flex-column text-start'>
-                    <p className='my-0'> Mot de passe </p>
-                    <input id="password" className='CardInput mb-2' type="password" placeholder='Mot de passe' onChange={handlePasswordChange} value={password} ></input>
+                    <Input id="password" title='Mot de passe' type="password" placeholder='Mot de passe' onChange={handleChange} value={password}></Input>
                 </div>
 
 

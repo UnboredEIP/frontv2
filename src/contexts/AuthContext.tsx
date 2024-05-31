@@ -51,6 +51,26 @@ const AuthProvider: FC<{children: React.ReactNode}> = ({ children }) => {
         }
     }
 
+    const Register = async(username: string, email: string, password: string, date: string, sexe: string, url: string) => {
+        const response = await fetch("https://x2025unbored786979363000.francecentral.cloudapp.azure.com/auth"+url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify ({
+                username,
+                email,
+                password,
+                birthdate: date,
+                gender: sexe
+            })
+        })
+        const data = await response.json();
+        if (data.statusCode === 201) {
+            navigate("/");
+        }
+    }
+
     const Disconnect = () => {
         setUser(null)
         localStorage.removeItem("authToken");
@@ -66,7 +86,8 @@ const AuthProvider: FC<{children: React.ReactNode}> = ({ children }) => {
         user,
         authToken,
         Disconnect,
-        Log
+        Log,
+        Register,
     };
 
     return (

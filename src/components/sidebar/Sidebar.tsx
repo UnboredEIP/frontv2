@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import './Sidebar.css'
 
-interface MenuItem {
+interface MenuItem {
     name: string;
     links?: string;
 }

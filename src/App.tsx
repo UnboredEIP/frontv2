@@ -7,8 +7,6 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from "react-route
 //routes pages
 import Login from './pages/authentication/login/Login';
 import Register from './pages/authentication/register/Register';
-import LoginPro from './pages/authentication/login/ProLogin';
-import ProRegister from './pages/authentication/register/ProRegister';
 import Home from './pages/home/Home';
 
 // contexts
@@ -62,10 +60,12 @@ function MainContent() {
       <div className='col-12' style={{paddingTop: showcase ? '0' : '100px'}}>
         <Routes>
           <Route path="/" element={<Home />}/>
-          <Route path="/login" element={<Login />}/>
-          <Route path="/pro/login" element={<LoginPro />}/>
-          <Route path="/register" element={<Register />}/>
-          <Route path="/pro/register" element={<ProRegister />}/>
+          <Route path="/login" element={<Login pageType='login'/>}/>
+          <Route path="/pro/login" element={<Login pageType="loginPro" />}/>
+
+          <Route path="/register" element={<Register pageType='register' />}/>
+          <Route path="/pro/register" element={<Register pageType='registerPro' />}/>
+
           <Route path="/site_vitrine" element={<Vitrine />} />
         </Routes>
       </div>
