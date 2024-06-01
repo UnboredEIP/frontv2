@@ -36,28 +36,28 @@ function MainContent() {
 
 
   return (
-    <>
+    <div className='col-12'>
       {showcase ?
-      <>
-        <div className="position-fixed col-2 h-100">
-          <Sidebar items={showcaseSideItems}/>
-        </div>
-        <div className="position-fixed col-12 z-3">
-            <Navbar items={showcaseItems}/>
-        </div>
-      </>
-      :
-      <>
-        <div className="">
-          <Sidebar />
-        </div>
-        <div className="position-fixed col-12 z-3">
-          <Navbar items={items}/>
-        </div>
-      </>
+        <>
+          <div className="position-fixed col-2 h-100">
+            <Sidebar items={showcaseSideItems}/>
+          </div>
+          <div className="position-fixed col-12 z-3">
+              <Navbar items={showcaseItems}/>
+          </div>
+        </>
+        :
+        <>
+          <div className="col-3">
+            <Sidebar />
+          </div>
+          <div className="position-fixed col-12 z-3">
+            <Navbar items={items}/>
+          </div>
+        </>
       }
 
-      <div className='col-12' style={{paddingTop: showcase ? '0' : '100px'}}>
+      <div className='col-12 justify-content-center' style={{paddingTop: showcase ? '0' : '100px'}}>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/login" element={<Login pageType='login'/>}/>
@@ -69,7 +69,7 @@ function MainContent() {
           <Route path="/site_vitrine" element={<Vitrine />} />
         </Routes>
       </div>
-    </>
+    </div>
   );
 }
 export default App;

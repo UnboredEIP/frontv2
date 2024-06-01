@@ -1,15 +1,24 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import Selectbar from "../../components/selectbar/Selectbar";
 
 
 export const Home = () => {
     let { user } = useContext(AuthContext)
     
+    const handleSelect = (selectedItem: string) => {
+        console.log("Selected item:", selectedItem);
+    };
+
     return (
-        <div>
+        <div className="col-12">
             { user ?
                 <div>
-                    stp
+                    Hello {user.users.username}
+
+                    <div className="col-7 align-center mx-auto justify-content-center">
+                        <Selectbar onSelect={handleSelect} />
+                    </div>
                 </div>
                 :
                 <div className="d-flex justify-content-center">

@@ -30,8 +30,6 @@ export const Register: React.FC<RegisterProps> = ({pageType}) => {
         }
     }
 
-    const selectOptions = ["Homme", "Femme", "Autre"];
-
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -83,7 +81,7 @@ export const Register: React.FC<RegisterProps> = ({pageType}) => {
                 </div>
 
                 <div className='d-flex CardContent justify-content-start w-100 px-1 flex-column text-start'>
-                    <Input id="sexe" type="selector" title="Sexe" onChange={handleChange} selectOptions={selectOptions} value={sexe}></Input>
+                    <Input id="sexe" type="selector" title="Sexe" onChange={handleChange} selectOptions={["Homme", "Femme", "Autre"]} value={sexe}></Input>
                 </div>
 
 
@@ -92,7 +90,7 @@ export const Register: React.FC<RegisterProps> = ({pageType}) => {
                         Mot de passe oublié ?
                     </div>
                 </div>
-                <Button className="mb-1" onClick={handleClick} name="Se connecter" backgroundColor='#e1604d' textColor='white'/>
+                <Button className="mb-1" onClick={handleClick} name="S'inscrire" backgroundColor='#e1604d' hooverColor="#DC5F00" shadowColor='#FFBF78' textColor='white'/>
             </div>
         </div>
     )

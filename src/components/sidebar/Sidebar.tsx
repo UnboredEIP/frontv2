@@ -15,8 +15,6 @@ export const Sidebar: React.FC<SidebarProps> = ({items}) => {
     const { user } = useContext(AuthContext)
     const [unrolled, setUnrolled] = useState(false);
 
-    console.log("stp :", user)
-
     const unrolledProfile = () => {
         setUnrolled(!unrolled);
     }
