@@ -25,10 +25,10 @@ export const Sidebar: React.FC<SidebarProps> = ({items}) => {
                 <div style={{height: '45%'}}/>
                 {items.map((item, index) => {
                     return (
-                        <div className="SidebarText d-flex flex-row w-100 py-3">
-                            <a key={index} href={item.links} className="col-12 text-center">
+                        <div key={index} onClick={() => {if (item.links)window.location.href = item.links}} className="SidebarText d-flex flex-row w-100 py-3">
+                            <p className="col-12 text-center my-0">
                                 {item.name}
-                            </a>
+                            </p>
                         </div>
                     )
                 })}

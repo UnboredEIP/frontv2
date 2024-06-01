@@ -1,7 +1,6 @@
 .Sidebar {
     height: 100%;
     background-color: #e1604d;
-
 }
 
 .SidebarText {
@@ -15,7 +14,8 @@
         background-color: #e1604d;
         filter: brightness(80%);
     };
-    a {
+    cursor: pointer;
+    p {
         text-decoration: none;
         color: whitesmoke;
     }

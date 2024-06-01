@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import Selectbar from "../../components/selectbar/Selectbar";
+import Button from "../../components/button/Button";
 
 
 export const Home = () => {
@@ -23,7 +24,7 @@ export const Home = () => {
                 :
                 <div className="d-flex justify-content-center">
                     <div className="Card d-flex col-4 align-items-center flex-column py-auto mx-auto">
-                    <div className='CardTitle my-1'>
+                        <div className='CardTitle my-1'>
                             <h1> Bienvenue sur UnBored </h1>
                             <p> L'application qui te satisfera de l'utilisation
                                 de ton temps libre tout en prenant du fun
@@ -31,8 +32,10 @@ export const Home = () => {
                                 en dessous pour être au courant de l'avancé du projet !
                             </p>
                         </div>
+                        <div style={{height: "20vw"}} />
+                        <Button backgroundColor="white" links="https://www.instagram.com/unbored_paris/" newPage={true} name="N'hésitez pas à nous suivre sur instagram !"></Button>
                     </div>
-                    <div style={{height: "40vw"}} />
+                    
                 </div>
             }
         </div>

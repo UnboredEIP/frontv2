@@ -73,7 +73,7 @@ export const Login: React.FC<LoginProps> = ({pageType}) => {
                         Se souvenir de moi
                     </div>
                     <div className='col-3 text-end w-50'>
-                        Mot de passe oublié ?
+                        Mot de passe oublié?
                     </div>
                 </div>
                 <Button className="mb-1" onClick={handleClick} name="Se connecter" backgroundColor='#e1604d' hooverColor="#DC5F00" shadowColor='#FFBF78' textColor='white'/>

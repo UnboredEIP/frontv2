@@ -10,9 +10,10 @@ interface ButtonProps {
     hooverColor?: string;
     className?: string;
     shadowColor?: string;
+    newPage?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ name, backgroundColor, textColor, onClick, links, className, hooverColor, shadowColor }) => {
+export const Button: React.FC<ButtonProps> = ({ name, backgroundColor, textColor, onClick, links, className, hooverColor, shadowColor, newPage }) => {
     const [hover, setHover] = useState(false);
 
     const buttonStyle = {
@@ -24,7 +25,7 @@ export const Button: React.FC<ButtonProps> = ({ name, backgroundColor, textColor
 
     return (
         <div style={buttonStyle} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} className={`Button p-0 py-2 mx-1 ${className}`} onClick={onClick}>
-            <a style={{color: textColor}} href={links} className='my-0 p-3 BtnText h-100 w-100'>
+            <a style={{color: textColor}} href={links}  target={newPage === true ? "_blank" : ''}  rel="noreferrer" className='my-0 p-3 BtnText h-100 w-100'>
                 {name}
             </a>
         </div>
