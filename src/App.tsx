@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/navbar/Navbar';
@@ -10,7 +10,7 @@ import Register from './pages/authentication/register/Register';
 import Home from './pages/home/Home';
 
 // contexts
-import AuthProvider from './contexts/AuthContext';
+import AuthProvider, { AuthContext } from './contexts/AuthContext';
 import Sidebar from './components/sidebar/Sidebar';
 import Vitrine from './pages/vitrine/Vitrine';
 
@@ -32,15 +32,17 @@ function MainContent() {
   const items = [{name: "S'inscrire", links: "/register"}, {name: "Se connecter", links: "/login"}, {name: "Unbored PRO", links: "/pro/login"}];
   const showcaseSideItems = [{name: "Presentation", links: "#presentation"}, {name: "Application", links: "#mobile"}, {name: "Utilisateur", links: "#user"}, {name: "Professionel", links: "#pro"}] 
   const showcaseItems = [{name: "Notre site !", links: "/"}] 
-
-
-
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const {user} = useContext(AuthContext)
+  const toggleSidebar = () => {
+    setIsSidebarVisible(prevState => !prevState);
+  };
   return (
-    <div className='col-12'>
+    <div className='col-12 d-flex'>
       {showcase ?
         <>
           <div className="position-fixed col-2 h-100">
-            <Sidebar items={showcaseSideItems}/>
+              <Sidebar items={showcaseSideItems}/>
           </div>
           <div className="position-fixed col-12 z-3">
               <Navbar items={showcaseItems}/>
@@ -48,8 +50,8 @@ function MainContent() {
         </>
         :
         <>
-          <div className="col-3">
-            <Sidebar />
+          <div className={`${isSidebarVisible && user ? 'col-2' : 'col-0'}`}>
+            <Sidebar toggleSidebar={toggleSidebar}/>
           </div>
           <div className="position-fixed col-12 z-3">
             <Navbar items={items}/>
@@ -57,7 +59,7 @@ function MainContent() {
         </>
       }
 
-      <div className='col-12 justify-content-center' style={{paddingTop: showcase ? '0' : '100px'}}>
+      <div className={`${isSidebarVisible && user ? 'col-9' : 'col-12'} transition-all`} style={{paddingTop: showcase ? '0' : '100px'}}>
         <Routes>
           <Route path="/" element={<Home />}/>
           <Route path="/login" element={<Login pageType='login'/>}/>

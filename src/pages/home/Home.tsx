@@ -17,8 +17,19 @@ export const Home = () => {
                 <div>
                     Hello {user.users.username}
 
-                    <div className="col-7 align-center mx-auto justify-content-center">
+                    <div className="col-10 mb-4 align-center mx-auto justify-content-center">
                         <Selectbar onSelect={handleSelect} />
+                    </div>
+                    <div className="col-9 d-flex mx-auto justify-content-between">
+                        <div className="col-3 Card">
+                            <div className='CardTitle my-1'>
+                                coucou
+                            </div>
+                        </div>
+                        <div className="col-2 Card">
+                            coucou
+                        </div>
+
                     </div>
                 </div>
                 :
@@ -35,7 +46,6 @@ export const Home = () => {
                         <div style={{height: "20vw"}} />
                         <Button backgroundColor="white" links="https://www.instagram.com/unbored_paris/" newPage={true} name="N'hésitez pas à nous suivre sur instagram !"></Button>
                     </div>
-                    
                 </div>
             }
         </div>

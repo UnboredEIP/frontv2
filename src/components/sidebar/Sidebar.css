@@ -1,6 +1,12 @@
 .Sidebar {
     height: 100%;
     background-color: #e1604d;
+    transition: transform 0.3s ease-in-out;
+
+}
+
+.Sidebar.hidden {
+    transform: translateX(-100%);
 }
 
 .SidebarText {
@@ -19,4 +25,25 @@
         text-decoration: none;
         color: whitesmoke;
     }
+}
+
+.hover-area {
+    position: fixed;
+    left: -25px;
+    top: 0;
+    bottom: 0;
+    width: 50px; 
+    background-color: transparent; 
+    transition: background-color 0.3s;
+    transition: left 0.3s;
+}
+
+.hover-area:hover {
+    left: 0px;
+    background-color: #e1604d; 
+}
+
+.reveal-sidebar {
+    transform: translateX(-80%); 
+    cursor: pointer;
 }

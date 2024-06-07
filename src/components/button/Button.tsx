@@ -11,16 +11,19 @@ interface ButtonProps {
     className?: string;
     shadowColor?: string;
     newPage?: boolean;
+    disabled?: boolean;
 }
 
-export const Button: React.FC<ButtonProps> = ({ name, backgroundColor, textColor, onClick, links, className, hooverColor, shadowColor, newPage }) => {
+export const Button: React.FC<ButtonProps> = ({ name, backgroundColor, textColor, onClick, links, className, hooverColor, shadowColor, newPage, disabled }) => {
     const [hover, setHover] = useState(false);
 
-    const buttonStyle = {
-        backgroundColor: hover ? (hooverColor ? hooverColor : 'lightgray') : backgroundColor,
+    const buttonStyle: React.CSSProperties = {
+        backgroundColor: disabled ? 'gray' : hover ? (hooverColor ? hooverColor : 'lightgray') : backgroundColor,
         transition: 'background-color 0.3s, transform 0.3s',
-        transform: hover ? 'scale(1.05)' : 'scale(1)',
-        boxShadow: '0px 2px 2px' + (shadowColor ? shadowColor : ' lightgray')
+        transform: hover && !disabled ? 'scale(1.05)' : 'scale(1)',
+        boxShadow: '0px 2px 2px' + (shadowColor ? shadowColor : ' lightgray'),
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        pointerEvents: disabled ? 'none' : 'auto'
     };
 
     return (

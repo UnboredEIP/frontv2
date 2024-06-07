@@ -90,7 +90,7 @@ export const Register: React.FC<RegisterProps> = ({pageType}) => {
                         Mot de passe oublié ?
                     </div>
                 </div>
-                <Button className="mb-1" onClick={handleClick} name="S'inscrire" backgroundColor='#e1604d' hooverColor="#DC5F00" shadowColor='#FFBF78' textColor='white'/>
+                <Button className="mb-1" disabled={!email || !password || !username || !sexe || !date} onClick={handleClick} name="S'inscrire" backgroundColor='#e1604d' hooverColor="#DC5F00" shadowColor='#FFBF78' textColor='white'/>
             </div>
         </div>
     )

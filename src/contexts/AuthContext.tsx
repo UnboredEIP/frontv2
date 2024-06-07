@@ -26,7 +26,7 @@ const AuthProvider: FC<{children: React.ReactNode}> = ({ children }) => {
     });
 
     const Log = async(email: string, password: string, stay: boolean) => {
-        const response = await fetch('https://x2025unbored786979363000.francecentral.cloudapp.azure.com/auth/login', {
+        await fetch('https://x2025unbored786979363000.francecentral.cloudapp.azure.com/auth/login', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -35,20 +35,21 @@ const AuthProvider: FC<{children: React.ReactNode}> = ({ children }) => {
                 email,
                 password
             })
-        });
-        const data = await response.json();
-        if (data.statusCode === 202) {
-            if (stay === true) {
-                localStorage.setItem("authToken", data.token);
-                localStorage.setItem("refreshToken", data.refresh);
-            } else {
-                sessionStorage.setItem("authToken", data.token);
-                sessionStorage.setItem("refreshToken", data.refresh);                    
+        }).then(response => response.json())
+        .then(data => {
+            if (data.statusCode === 202) {
+                if (stay === true) {
+                    localStorage.setItem("authToken", data.token);
+                    localStorage.setItem("refreshToken", data.refresh);
+                } else {
+                    sessionStorage.setItem("authToken", data.token);
+                    sessionStorage.setItem("refreshToken", data.refresh);                    
+                }
+                setAuthToken({authToken: data.token, refreshToken: data.refresh})
+                setUser(jwtDecode(data.token))
+                navigate("/")
             }
-            setAuthToken({authToken: data.token, refreshToken: data.refresh})
-            setUser(jwtDecode(data.token))
-            navigate("/")
-        }
+        })
     }
 
     const Register = async(username: string, email: string, password: string, date: string, sexe: string, url: string) => {
