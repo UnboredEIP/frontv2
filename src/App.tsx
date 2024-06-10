@@ -11,6 +11,7 @@ import Home from './pages/home/Home';
 
 // contexts
 import AuthProvider, { AuthContext } from './contexts/AuthContext';
+import EventProvider from './contexts/EventContext';
 import Sidebar from './components/sidebar/Sidebar';
 import Vitrine from './pages/vitrine/Vitrine';
 
@@ -19,7 +20,11 @@ function App() {
     <div className="App">
       <Router>
         <AuthProvider>
+          <EventProvider>
+
           <MainContent />
+          </EventProvider>
+
         </AuthProvider>
       </Router>
     </div>
@@ -34,9 +39,11 @@ function MainContent() {
   const showcaseItems = [{name: "Notre site !", links: "/"}] 
   const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const {user} = useContext(AuthContext)
+
   const toggleSidebar = () => {
     setIsSidebarVisible(prevState => !prevState);
   };
+
   return (
     <div className='col-12 d-flex'>
       {showcase ?

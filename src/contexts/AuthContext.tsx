@@ -1,4 +1,4 @@
-import { createContext, FC, useState } from "react";
+import { createContext, FC, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
@@ -82,6 +82,23 @@ const AuthProvider: FC<{children: React.ReactNode}> = ({ children }) => {
 
         navigate("/")
     }
+
+    useEffect(() => {
+        const sessionToken = sessionStorage.getItem("authToken");
+        const localToken = localStorage.getItem("authToken");
+
+        if (sessionToken && !authToken) {
+            setAuthToken({
+                authToken: sessionToken,
+                refreshToken: sessionStorage.getItem("refreshToken") || '',
+            });
+        } else if (localToken && !authToken) {
+            setAuthToken({
+                authToken: localToken,
+                refreshToken: localStorage.getItem("refreshToken") || '',
+            });
+        }
+    }, [authToken]);
 
     const contextData = {
         user,

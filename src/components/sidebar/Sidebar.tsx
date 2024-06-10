@@ -30,9 +30,9 @@ export const Sidebar: React.FC<SidebarProps> = ({items, toggleSidebar}) => {
     const sidebarClass = isVisible ? 'Sidebar visible' : `Sidebar hidden ${isHovering ? 'reveal-sidebar' : ''}`;
 
 
-    const unrolledProfile = () => {
-        setUnrolled(!unrolled);
-    }
+    // const unrolledProfile = () => {
+    //     setUnrolled(!unrolled);
+    // }
 
     if (items) {
         return (
@@ -61,7 +61,7 @@ export const Sidebar: React.FC<SidebarProps> = ({items, toggleSidebar}) => {
         <>
             {!isVisible && ( <div className="hover-area" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)} onClick={toggleVisibility}/> )}
             
-            <div className={sidebarClass + ' d-flex flex-column position-absolute col-2'}>
+            <div className={sidebarClass + ' d-flex flex-column position-fixed col-2'}>
                 <div style={{ height: '80px' }} />
 
                 <div className="SidebarText d-flex flex-row w-100">
