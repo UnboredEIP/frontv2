@@ -47,7 +47,7 @@ const AuthProvider: FC<{children: React.ReactNode}> = ({ children }) => {
                 }
                 setAuthToken({authToken: data.token, refreshToken: data.refresh})
                 setUser(jwtDecode(data.token))
-                navigate("/")
+                navigate("/events")
             }
         })
     }

@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
@@ -8,6 +7,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from "react-route
 import Login from './pages/authentication/login/Login';
 import Register from './pages/authentication/register/Register';
 import Home from './pages/home/Home';
+import Events from './pages/events/Events';
 
 // contexts
 import AuthProvider, { AuthContext } from './contexts/AuthContext';
@@ -74,6 +74,8 @@ function MainContent() {
 
           <Route path="/register" element={<Register pageType='register' />}/>
           <Route path="/pro/register" element={<Register pageType='registerPro' />}/>
+
+          <Route path="/events" element={<Events />} />
 
           <Route path="/site_vitrine" element={<Vitrine />} />
         </Routes>
