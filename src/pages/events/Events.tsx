@@ -41,14 +41,14 @@ export const Events = () => {
 
     return (
         <div>
-            Hello {user.users.username}
+            Hello {user?.users?.username}
             <div className="col-10 mb-4 align-center mx-auto justify-content-center">
                 <Selectbar onSelect={handleSelect} />
             </div>
             <div className="col-9 d-flex mx-auto flex-wrap justify-content-center">
                 {eventsList.map((item: Event, index: number) => {
                     return (
-                        <div key={index} className="d-flex flex-column Card col-3 mx-1 my-1">
+                        <div key={index} className="d-flex flex-column Card col-3 mx-1 my-1 h-50">
                             <div className="CardTitle">{item.name}</div>
                             <div className="flex-grow-1 d-flex justify-content-center">
                                 <img className="test align-self-center" src={"https://x2025unbored786979363000.francecentral.cloudapp.azure.com/getImage?imageName=" + item.pictures[0].id} alt=""/>

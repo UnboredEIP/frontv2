@@ -10,16 +10,19 @@ interface MenuItem {
 interface SidebarProps {
     items?: MenuItem[]
     toggleSidebar?: any;
+    toggleVisible?: any;
+    unrolled?: boolean;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({items, toggleSidebar}) => {
+export const Sidebar: React.FC<SidebarProps> = ({items, toggleSidebar, toggleVisible, unrolled}) => {
     const { user } = useContext(AuthContext)
-    const [unrolled, setUnrolled] = useState(false);
+    const [isUnrolled, setIsUnrolled] = useState(unrolled);
     const [isVisible, setIsVisible] = useState(true);
     const [isHovering, setIsHovering] = useState(false);
 
     const toggleUnrolledProfile = () => {
-        setUnrolled(!unrolled);
+        toggleVisible()
+        setIsUnrolled(!isUnrolled);
     };
 
     const toggleVisibility = () => {
@@ -64,9 +67,9 @@ export const Sidebar: React.FC<SidebarProps> = ({items, toggleSidebar}) => {
             <div className={sidebarClass + ' d-flex flex-column position-fixed col-2'}>
                 <div style={{ height: '80px' }} />
 
-                <div className="SidebarText d-flex flex-row w-100">
+                <div className="SidebarText d-flex flex-row w-100 pb-3">
                     <i className="fas fa-home col-3 text-center pt-1"></i>
-                    <p className="col-9 text-start"> Accueil</p>
+                    <a href="/" className="col-9 text-start"> Accueil</a>
                 </div>
 
                 <div onClick={toggleUnrolledProfile} className="SidebarText d-flex flex-row w-100">
@@ -77,11 +80,11 @@ export const Sidebar: React.FC<SidebarProps> = ({items, toggleSidebar}) => {
 
                 {unrolled && (
                     <div style={{ marginLeft: "10%" }} className="d-flex flex-column">
-                        <div className="SidebarText d-flex flex-row w-100">
+                        <div className="SidebarText d-flex flex-row w-100 pb-3">
                             <i className="fa-solid fa-user col-3 text-center pt-1"></i>
-                            <p className="col-9 text-start">
+                            <a href="/update/profile" className="col-9 text-start">
                                 Mise à jour profile
-                            </p>
+                            </a>
                         </div>
                         <div className="SidebarText d-flex flex-row w-100">
                             <i className="fa-solid fa-user col-3 text-center pt-1"></i>
