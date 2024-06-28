@@ -1,0 +1,34 @@
+.Pagination {
+    height: 80px;
+    background-color: #e1604d;
+    box-shadow: 0 2px 2px lightgray;
+    border-radius: 5px;
+    position: relative;
+}
+
+.PaginationButton {
+    background-color: white;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 5px;
+    outline: 0;
+    border: 0; 
+    cursor: pointer;
+    box-shadow: 0px 2px 2px lightgray;
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.PaginationButton:hover {
+    background-color: #d4d4d4;
+    transform: scale(1.05);
+}
+.PaginationButtonActive {
+    background-color: lightgray;
+    color: black;
+    padding: 5px 15px;
+    border-radius: 5px;
+    outline: 0;
+    border: 0; 
+    cursor: pointer;
+    box-shadow: 0px 2px 2px lightgray;
+}

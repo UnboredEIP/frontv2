@@ -1,4 +1,4 @@
-import { ReactNode, useContext, ReactElement } from "react";
+import { ReactNode, ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 
 interface PrivateRouteProps {

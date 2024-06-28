@@ -5,7 +5,7 @@ export const ProfileContext = createContext<any>(null);
 
 const ProfileProvider: FC<{children: React.ReactNode}> = ({children}) => {
     
-    const {user, authToken} = useContext(AuthContext);
+    const {authToken} = useContext(AuthContext);
     const [userInfos, setUserInfos] = useState<any>(null)
 
     const Profile = useCallback(async () => {

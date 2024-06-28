@@ -17,6 +17,7 @@ import Vitrine from './pages/vitrine/Vitrine';
 import { Update } from './pages/profile/update/Update';
 import ProfileProvider from './contexts/ProfileContext';
 import PrivateRoute from './components/Redirect';
+import { SidebarContext } from './contexts/SidebarContext';
 
 function App() {
   return (
@@ -40,16 +41,8 @@ function MainContent() {
   const items = [{name: "S'inscrire", links: "/register"}, {name: "Se connecter", links: "/login"}, {name: "Unbored PRO", links: "/pro/login"}];
   const showcaseSideItems = [{name: "Presentation", links: "#presentation"}, {name: "Application", links: "#mobile"}, {name: "Utilisateur", links: "#user"}, {name: "Professionel", links: "#pro"}] 
   const showcaseItems = [{name: "Notre site !", links: "/"}] 
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [unrolled, setUnrolled] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarVisible(prevState => !prevState);
-  };
-
-  const toggleVisible = () => {
-    setUnrolled(prevState => !unrolled);
-  }
+  const { isSidebarVisible } = useContext(SidebarContext);
 
   const { user } = useContext(AuthContext)
 
@@ -67,7 +60,7 @@ function MainContent() {
         :
         <>
           <div className={`${user && isSidebarVisible ? 'col-2' : 'col-0'}`}>
-            <Sidebar toggleSidebar={toggleSidebar} toggleVisible={toggleVisible} unrolled={unrolled}/>
+            <Sidebar/>
           </div>
           <div className="position-fixed col-12 z-3">
             <Navbar items={items}/>
