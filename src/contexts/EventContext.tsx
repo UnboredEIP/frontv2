@@ -38,7 +38,7 @@ const EventProvider: FC<{children: React.ReactNode}> = ({ children }) => {
     const [eventsList, setEventsList] = useState<Event[]>([]);
     const [loading, setLoading] = useState(false);
     const pageSize = 6;
-
+    const [total, setTotal] = useState<number>(0);
     const query = new URLSearchParams(location.search);
     const initialPage = Number(query.get("page")) || 1;
     const [page, setPage] = useState<number>(initialPage);
@@ -57,8 +57,8 @@ const EventProvider: FC<{children: React.ReactNode}> = ({ children }) => {
                 },
             });
             const data = await response.json();
-            console.log(data);
             setEventsList(data.events);
+            setTotal(data.total);
         } catch (error) {
             console.error("Failed to fetch events", error);
         } finally {
@@ -73,7 +73,10 @@ const EventProvider: FC<{children: React.ReactNode}> = ({ children }) => {
     }, [GetAllEvents, user]); 
 
     useEffect(() => {
-        navigation(`?page=${page}`);
+        if (user && location.pathname === '/events') {
+            console.log()
+            navigation(`?page=${page}`);
+        }
     }, [page, navigation]);
 
     const contextData = {
@@ -82,6 +85,7 @@ const EventProvider: FC<{children: React.ReactNode}> = ({ children }) => {
         pageSize,
         setPage,
         loading,
+        total
     };
 
     return (

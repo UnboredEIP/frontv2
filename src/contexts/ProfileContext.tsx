@@ -25,6 +25,24 @@ const ProfileProvider: FC<{children: React.ReactNode}> = ({children}) => {
         }
     }, [authToken])
 
+    const UpdateProfile = async (test: any) => {
+        try {
+            await fetch('https://x2025unbored786979363000.francecentral.cloudapp.azure.com/profile/update', {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer "+ authToken.authToken
+                },
+                body: JSON.stringify(test)
+            }).then(response => response.json())
+            .then(data => {
+                setUserInfos(data.user);
+            })
+        } catch (error) {
+            console.error("Failed to fetch profile", error)
+        }
+    }
+
     useEffect(() => {
         if (authToken) {
             Profile()
@@ -32,7 +50,8 @@ const ProfileProvider: FC<{children: React.ReactNode}> = ({children}) => {
     }, [Profile, authToken])
 
     const contextData = {
-        userInfos
+        userInfos,
+        UpdateProfile,
     }
 
     return (

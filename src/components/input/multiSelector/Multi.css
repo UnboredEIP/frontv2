@@ -1,0 +1,35 @@
+.MultiSelect {
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+.SelectContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    background-color: #fff;
+    z-index: 1000;
+    max-height: 150px;
+    overflow-y: auto;
+}
+  
+.option {
+    padding: 10px;
+    cursor: pointer;
+    transition: ease background-color 250ms;
+}
+  
+.option:hover {
+    background-color: lightgray;
+}
+  
+.option.selected {
+    background-color: #E1604D;
+    color: white;
+}
+  

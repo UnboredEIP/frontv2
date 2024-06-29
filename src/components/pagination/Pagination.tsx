@@ -3,10 +3,9 @@ import './Pagination.css';
 import { EventContext } from '../../contexts/EventContext';
 
 const Pagination = () => {
-    const totalItems = 100;  
-    const { pageSize, page, setPage, loading } = useContext(EventContext);
+    const { pageSize, page, setPage, loading, total } = useContext(EventContext);
 
-    const totalPages = Math.ceil(totalItems / pageSize);
+    const totalPages = Math.ceil(total / pageSize);
 
     const goToPage = (page: number) => {
         if (!loading) {

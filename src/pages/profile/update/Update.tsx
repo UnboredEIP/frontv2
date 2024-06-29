@@ -4,9 +4,19 @@ import { ProfileContext } from "../../../contexts/ProfileContext"
 import Button from "../../../components/button/Button"
 
 export const Update = () => {
-    const { userInfos } = useContext(ProfileContext)
 
-    console.log(userInfos)
+    const options = [
+        { label: 'Sport', value: 'sport' },
+        { label: 'Musique', value: 'musique' },
+        { label: 'Art', value: 'art' },
+        { label: 'Théâtre', value: 'théâtre' },
+        { label: 'Soirée', value: 'soirée' },
+        { label: 'Jeux', value: 'jeux' },
+        { label: 'Nature', value: 'nature' },
+        { label: 'Tech', value: 'tech' },
+        { label: 'Danse', value: 'danse' },
+    ];
+    const { userInfos, UpdateProfile } = useContext(ProfileContext)
 
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
@@ -14,6 +24,7 @@ export const Update = () => {
     const [date, setDate] = useState<string>('');
     const [sexe, setSexe] = useState<string>('Homme');
     const [initialDate, setInitialDate] = useState<string>('');
+    const [preferences, setPreferences] = useState<string[]>([]);
 
     const handleInput: { [key: string]: any } = {
         email: setEmail,
@@ -32,10 +43,40 @@ export const Update = () => {
         setDate(formattedDate);
         setInitialDate(formattedDate);
         setSexe(userInfos?.gender || 'Homme');
+        setPreferences(userInfos?.preferences);
     }, [userInfos]);
+
+
+    const handleMultiSelectChange = (selectedOptions: { label: string; value: string }[]) => {
+        setPreferences(selectedOptions.map(item => item.label));
+    };
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         handleInput[event.target.id](event.target.value);
+    }
+
+    const handleSubmit = () => {
+        const data: { [key: string]: string | string[]} = {};
+
+        if (username !== userInfos?.username) {
+            data.username = username;
+        }
+        if (email !== userInfos?.email) {
+            data.email = email;
+        }
+        if (date !== initialDate) {
+            data.birthdate = date;
+        }
+        if (sexe !== userInfos?.gender) {
+            data.gender = sexe;
+        }
+
+        if (preferences !== userInfos?.preferences) {
+            data.preferences = preferences;
+        }
+
+        UpdateProfile(data);
+
     }
 
     return (
@@ -69,7 +110,11 @@ export const Update = () => {
                     <div className='d-flex CardContent justify-content-start w-100 px-1 flex-column text-start'>
                         <Input id="date" title='Date de naissance' type="date" placeholder='Date de naissance'  onChange={handleChange} value={date}></Input>
                     </div>
-                    <Button className="mb-1" disabled={ (username === userInfos?.username && email === userInfos?.email && sexe === userInfos?.gender && date === initialDate) || userInfos === null } name="Changer" backgroundColor='#e1604d' hooverColor="#DC5F00" shadowColor='#FFBF78' textColor='white'/>
+
+                    <div className='d-flex CardContent justify-content-start w-100 px-1 flex-column text-start'>
+                        <Input id="sexe" type="multiple" title="Preferences" multiSelectOptions={options} actualSelectOptions={preferences?.map(item => ({label: item, value: item.toLowerCase()}))} handleMultiSelectChange={handleMultiSelectChange} ></Input>
+                    </div>
+                    <Button className="mb-1" disabled={ ( preferences === userInfos?.preferences && username === userInfos?.username && email === userInfos?.email && sexe === userInfos?.gender && date === initialDate) || userInfos === null } name="Changer" backgroundColor='#e1604d' hooverColor="#DC5F00" shadowColor='#FFBF78' textColor='white' onClick={handleSubmit}/>
                 </div>
             </div>
         </div>
