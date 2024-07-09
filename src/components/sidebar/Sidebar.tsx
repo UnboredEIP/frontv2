@@ -65,6 +65,11 @@ export const Sidebar: React.FC<SidebarProps> = ({items}) => {
                     <a href="/" className="col-9 text-start"> Accueil</a>
                 </div>
 
+                <div className="SidebarText d-flex flex-row w-100 pb-3">
+                    <i className="fas fa-ticket col-3 text-center pt-1"></i>
+                    <a href="/events" className="col-9 text-start"> Evenements </a>
+                </div>
+
                 <div onClick={toggleUnrolledProfile} className="SidebarText d-flex flex-row w-100">
                     <i className="fa-solid fa-user col-3 text-center pt-1"></i>
                     <p className="col-6 text-start"> Profile </p>
@@ -74,15 +79,15 @@ export const Sidebar: React.FC<SidebarProps> = ({items}) => {
                 {isProfileUnrolled && (
                     <div style={{ marginLeft: "10%" }} className="d-flex flex-column">
                         <div className="SidebarText d-flex flex-row w-100 pb-3">
-                            <i className="fa-solid fa-user col-3 text-center pt-1"></i>
+                            <i className="fa-solid fa-pen-to-square col-3 text-center pt-1"></i>
                             <a href="/update/profile" className="col-9 text-start">
                                 Mise à jour profile
                             </a>
                         </div>
                         <div className="SidebarText d-flex flex-row w-100">
-                            <i className="fa-solid fa-user col-3 text-center pt-1"></i>
+                            <i className="fa-solid fa-address-card col-3 text-center pt-1"></i>
                             <p className="col-9 text-start">
-                                Profile Info
+                                Informations
                             </p>
                         </div>
                     </div>
@@ -95,9 +100,9 @@ export const Sidebar: React.FC<SidebarProps> = ({items}) => {
                     </div>
                 )}
 
-                <div className="SidebarText d-flex flex-row w-100">
+                <div className="SidebarText d-flex flex-row w-100 pb-3">
                     <i className="fa-solid fa-calendar col-3 text-center pt-1"></i>
-                    <p className="col-9 text-start"> Calendrier </p>
+                    <a href="/calendar" className="col-9 text-start"> Calendrier </a>
                 </div>
 
                 <div className="SidebarText d-flex flex-row w-100" onClick={toggleVisibility}>

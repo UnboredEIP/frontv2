@@ -13,20 +13,6 @@ const Pagination = () => {
         }
     };
 
-    const nextPageGroup = () => {
-        if (!loading) {
-            const nextPage = page + 5;
-            setPage(nextPage > totalPages ? totalPages : nextPage);
-        }
-    };
-
-    const prevPageGroup = () => {
-        if (!loading) {
-            const prevPage = page - 5;
-            setPage(prevPage < 1 ? 1 : prevPage);
-        }
-    };
-
     const generatePageNumbers = () => {
         const pageNumbers = [];
         if (totalPages <= 5) {

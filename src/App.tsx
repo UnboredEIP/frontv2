@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import Navbar from './components/navbar/Navbar';
 import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from "react-router-dom";
@@ -18,6 +18,7 @@ import { Update } from './pages/profile/update/Update';
 import ProfileProvider from './contexts/ProfileContext';
 import PrivateRoute from './components/Redirect';
 import { SidebarContext } from './contexts/SidebarContext';
+import UnboredCalendar from './pages/calendar/Calendar';
 
 function App() {
   return (
@@ -41,7 +42,6 @@ function MainContent() {
   const items = [{name: "S'inscrire", links: "/register"}, {name: "Se connecter", links: "/login"}, {name: "Unbored PRO", links: "/pro/login"}];
   const showcaseSideItems = [{name: "Presentation", links: "#presentation"}, {name: "Application", links: "#mobile"}, {name: "Utilisateur", links: "#user"}, {name: "Professionel", links: "#pro"}] 
   const showcaseItems = [{name: "Notre site !", links: "/"}] 
-  const [unrolled, setUnrolled] = useState(false);
   const { isSidebarVisible } = useContext(SidebarContext);
 
   const { user } = useContext(AuthContext)
@@ -86,6 +86,12 @@ function MainContent() {
             <Update />
           </PrivateRoute>
           } />
+
+          <Route path="/calendar" element={<PrivateRoute>
+            <UnboredCalendar />
+          </PrivateRoute>
+          } />
+
 
 
           <Route path="/site_vitrine" element={<Vitrine />} />

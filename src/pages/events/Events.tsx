@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./Events.css";
 import { AuthContext } from "../../contexts/AuthContext";
 import { EventContext } from "../../contexts/EventContext";
@@ -20,7 +20,7 @@ export const Events = () => {
             <div className="col-10 mb-4 align-center mx-auto justify-content-center">
                 <Selectbar onSelect={handleSelect} />
             </div>
-            <div className="col-9 d-flex mx-auto flex-wrap justify-content-center">
+            <div className="col-9 d-flex mx-auto flex-wrap justify-content-center pb-3">
                 {eventsList.map((item: any, index: any) => (
                     <EventCard key={index} item={item} />
                 ))}

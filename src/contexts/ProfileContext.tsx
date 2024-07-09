@@ -7,6 +7,7 @@ const ProfileProvider: FC<{children: React.ReactNode}> = ({children}) => {
     
     const {authToken} = useContext(AuthContext);
     const [userInfos, setUserInfos] = useState<any>(null)
+    const [userCalendar, setUserCalendar] = useState<any>(null);
 
     const Profile = useCallback(async () => {
         try {
@@ -36,21 +37,39 @@ const ProfileProvider: FC<{children: React.ReactNode}> = ({children}) => {
                 body: JSON.stringify(test)
             }).then(response => response.json())
             .then(data => {
-                setUserInfos(data.user);
+                setUserInfos(data.reservations);
             })
         } catch (error) {
             console.error("Failed to fetch profile", error)
         }
     }
 
+    const GetReservations = useCallback(async () => {try {
+        await fetch('https://x2025unbored786979363000.francecentral.cloudapp.azure.com/event/reservations', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer "+ authToken.authToken
+            },
+        }).then(response => response.json())
+        .then(data => {
+            setUserCalendar(data.reservations);
+        })
+        } catch (error) {
+            console.error("Failed to fetch profile", error)
+        }
+    }, [authToken])
+
     useEffect(() => {
         if (authToken) {
             Profile()
+            GetReservations()
         }
-    }, [Profile, authToken])
+    }, [Profile, GetReservations, authToken])
 
     const contextData = {
         userInfos,
+        userCalendar,
         UpdateProfile,
     }
 

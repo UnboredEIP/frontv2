@@ -74,10 +74,9 @@ const EventProvider: FC<{children: React.ReactNode}> = ({ children }) => {
 
     useEffect(() => {
         if (user && location.pathname === '/events') {
-            console.log()
             navigation(`?page=${page}`);
         }
-    }, [page, navigation]);
+    }, [page, navigation, location.pathname, user]);
 
     const contextData = {
         eventsList,
